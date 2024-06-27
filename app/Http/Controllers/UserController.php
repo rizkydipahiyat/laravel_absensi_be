@@ -39,6 +39,8 @@ class UserController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'role' => $request->role,
+            'position' => $request->position,
+            'departement' => $request->departement,
             'password' => Hash::make($request->password),
         ]);
 
@@ -56,14 +58,14 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'phone' => 'required',
-            'role' => 'required',
         ]);
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->role = $request->role;
+        $user->position = $request->position;
+        $user->departement = $request->departement;
         if ($request->password) {
             $user->update([
                 $user->password = Hash::make($request->password)
