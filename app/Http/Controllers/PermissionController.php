@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Permission;
 use App\Models\User;
-use Illuminate\Support\Facades\Notification;
+use Kreait\Firebase\Messaging\Notification;
+use Kreait\Firebase\Messaging\CloudMessage;
 
 class PermissionController extends Controller
 {
@@ -41,24 +42,24 @@ class PermissionController extends Controller
         $permission->is_approved = $request->is_approved;
         $str = $request->is_approved == 1 ? 'Disetujui' : 'Ditolak';
         $permission->save();
-        // $this->sendNotificationToUser($permission->user_id, 'Status Izin anda adalah ' . $str);
+        $this->sendNotificationToUser($permission->user_id, 'Status Izin anda adalah ' . $str);
         return redirect()->route('permissions.index')->with('success', 'Permission updated successfully');
     }
 
-    // public function sendNotificationToUser($userId, $message)
-    // {
-    //     // Dapatkan FCM token user dari tabel 'users'
+    public function sendNotificationToUser($userId, $message)
+    {
+        // Dapatkan FCM token user dari tabel 'users'
 
-    //     $user = User::find($userId);
-    //     $token = $user->fcm_token;
+        $user = User::find($userId);
+        $token = $user->fcm_token;
 
-    //     // Kirim notifikasi ke perangkat Android
-    //     $messaging = app('firebase.messaging');
-    //     $notification = Notification::create('Status Izin', $message);
+        // Kirim notifikasi ke perangkat Android
+        $messaging = app('firebase.messaging');
+        $notification = Notification::create('Status Izin', $message);
 
-    //     $message = CloudMessage::withTarget('token', $token)
-    //         ->withNotification($notification);
+        $message = CloudMessage::withTarget('token', $token)
+            ->withNotification($notification);
 
-    //     $messaging->send($message);
-    // }
+        $messaging->send($message);
+    }
 }

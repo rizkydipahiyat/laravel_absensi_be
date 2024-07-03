@@ -17,14 +17,17 @@ Route::get('/user', function (Request $request) {
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/update-profile', [AuthController::class, 'updateProfile'])->middleware('auth:sanctum');
+Route::post('/update-fcm-token', [AuthController::class, 'updateFcmToken'])->middleware('auth:sanctum');
 
 // company
 Route::get('/company', [CompanyController::class, 'show'])->middleware('auth:sanctum');
 
-// check in
+// Attendance
 Route::post('/checkin', [AttendanceController::class, 'checkIn'])->middleware('auth:sanctum');
 Route::post('/checkout', [AttendanceController::class, 'checkOut'])->middleware('auth:sanctum');
 Route::get('/is-checkin', [AttendanceController::class, 'isCheckedin'])->middleware('auth:sanctum');
+Route::get('/api-attendances', [AttendanceController::class, 'index'])->middleware('auth:sanctum');
+
 
 
 // create permission
