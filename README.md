@@ -1,4 +1,4 @@
-<p align="center"><a href="#" target="_blank"><img src="https://raw.githubusercontent.com/rizkydipahiyat/laravel_absensi_be/master/public/img/presence-dashboard.png" width="400" alt="Presence App Dashboard"></a></p>
+<p align="center"><a href="#" target="_blank"><img src="https://raw.githubusercontent.com/rizkydipahiyat/laravel_absensi_be/master/public/img/presence-dashboard.png" width="1200" alt="Presence App Dashboard"></a></p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
